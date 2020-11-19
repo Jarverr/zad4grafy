@@ -1,0 +1,13 @@
+D:\Pulpit2\Grafy\Lab4\Lab4v3\Lab4v3\bin\Debug\netcoreapp3.1\Lab4v3.exe
+D:\Pulpit2\Grafy\Lab4\Lab4v3\Lab4v3\bin\Debug\netcoreapp3.1\Lab4v3.deps.json
+D:\Pulpit2\Grafy\Lab4\Lab4v3\Lab4v3\bin\Debug\netcoreapp3.1\Lab4v3.runtimeconfig.json
+D:\Pulpit2\Grafy\Lab4\Lab4v3\Lab4v3\bin\Debug\netcoreapp3.1\Lab4v3.runtimeconfig.dev.json
+D:\Pulpit2\Grafy\Lab4\Lab4v3\Lab4v3\bin\Debug\netcoreapp3.1\Lab4v3.dll
+D:\Pulpit2\Grafy\Lab4\Lab4v3\Lab4v3\bin\Debug\netcoreapp3.1\Lab4v3.pdb
+D:\Pulpit2\Grafy\Lab4\Lab4v3\Lab4v3\obj\Debug\netcoreapp3.1\Lab4v3.csprojAssemblyReference.cache
+D:\Pulpit2\Grafy\Lab4\Lab4v3\Lab4v3\obj\Debug\netcoreapp3.1\Lab4v3.AssemblyInfoInputs.cache
+D:\Pulpit2\Grafy\Lab4\Lab4v3\Lab4v3\obj\Debug\netcoreapp3.1\Lab4v3.AssemblyInfo.cs
+D:\Pulpit2\Grafy\Lab4\Lab4v3\Lab4v3\obj\Debug\netcoreapp3.1\Lab4v3.csproj.CoreCompileInputs.cache
+D:\Pulpit2\Grafy\Lab4\Lab4v3\Lab4v3\obj\Debug\netcoreapp3.1\Lab4v3.dll
+D:\Pulpit2\Grafy\Lab4\Lab4v3\Lab4v3\obj\Debug\netcoreapp3.1\Lab4v3.pdb
+D:\Pulpit2\Grafy\Lab4\Lab4v3\Lab4v3\obj\Debug\netcoreapp3.1\Lab4v3.genruntimeconfig.cache
