@@ -15,7 +15,8 @@ namespace Lab4v3
             //var text = "";//Console.ReadLine();
             //using StreamReader sr = new StreamReader("text.txt");
             //args[0] = sr.ReadToEnd();
-            args[0] = "ababcababcac";
+
+            args[0] = "abcxxxabc";
             Stopwatch sw = new Stopwatch();
             sw.Start();
             var trie = new UkkonenTrie<int>(1);
@@ -27,16 +28,33 @@ namespace Lab4v3
             string temp = "";
             List<string> myLongestWordEdge = new List<string>();
             //string[] temp = new string[trie._root._edges.Count];
-           
-            Parallel.ForEach(trie._root._edges,
-                (edge) => {
-                    Dictionary<char, Edge<int>> keyValuePairConvertedToDictonary = new Dictionary<char, Edge<int>> { { edge.Key, edge.Value } };
-                    string myLongestWord = "";
-                    TraversePostOrder(keyValuePairConvertedToDictonary, ref myLongestWord, ref temp, args[0]);
-                    myLongestWordEdge.Add(myLongestWord);
-                }
-                );
-            temp = string.Empty;
+            //try
+            //{
+            //Parallel.ForEach(trie._root._edges,
+            //(edge) =>
+            //{
+            //    Dictionary<char, Edge<int>> keyValuePairConvertedToDictonary = new Dictionary<char, Edge<int>> { { edge.Key, edge.Value } };
+            //    string myLongestWord = "";
+            //    TraversePostOrder(keyValuePairConvertedToDictonary, ref myLongestWord, ref temp, args[0]);
+            //    myLongestWordEdge.Add(myLongestWord);
+            //}
+            //);
+        //}
+        //catch (AggregateException ae)
+        //{
+        //    var ignoredExceptions = new List<Exception>();
+        //    // This is where you can choose which exceptions to handle.
+        //    foreach (var ex in ae.Flatten().InnerExceptions)
+        //    {
+        //        if (ex is ArgumentException)
+        //            Console.WriteLine(ex.Message);
+        //        else
+        //            ignoredExceptions.Add(ex);
+        //    }
+        //    if (ignoredExceptions.Count > 0) throw new AggregateException(ignoredExceptions);
+        //}
+
+        temp = string.Empty;
             for (int i = 0; i < myLongestWordEdge.Count; i++)
             {
                 if (temp.Length<myLongestWordEdge[i].Length)
@@ -44,13 +62,16 @@ namespace Lab4v3
                     temp = myLongestWordEdge[i];
                 }
             }
-            //TraversePostOrder( trie._root._edges, ref myLongestWord, ref temp,args[0]);
+            string myLongestWord = "";
+            TraversePostOrder(trie._root._edges, ref myLongestWord, ref temp, args[0]);
             sw.Stop(); 
-            Console.WriteLine(temp.Length*2+$"\nTime: {sw.Elapsed}");
+            Console.WriteLine("String: "+ myLongestWord + " ; "+ myLongestWord.Length*2+$"\nTime: {sw.Elapsed}");
 
 
             //trie2.Add(text,1);
         }
+        static string toRewrite = "";
+        static bool isOkay = false;
         public static void TraversePostOrder(IDictionary<char, Edge<int>> edges, ref string theLongestRepreatedPrefix, ref string currentWord, string text)
         {
             if (edges.Count != 0)
@@ -58,8 +79,11 @@ namespace Lab4v3
 
                 if (theLongestRepreatedPrefix.Length < currentWord.Length)
                 {
-                    theLongestRepreatedPrefix = checkIsThisStringOkay(  theLongestRepreatedPrefix,  currentWord,  text);
-                    
+                    (isOkay, toRewrite) = getTheLongestRepeatedString(  theLongestRepreatedPrefix,  currentWord,  text);
+                    if (isOkay)
+                    {
+                        theLongestRepreatedPrefix = toRewrite;
+                    }
 
                 }
                 foreach (var item in edges)
@@ -71,18 +95,33 @@ namespace Lab4v3
             }
         }
 
-        private static string checkIsThisStringOkay( string theLongestRepreatedPrefix,  string currentWord, string text)
+        private static (bool,string) getTheLongestRepeatedString( string theLongestRepreatedPrefix,  string currentWord, string text)
         {
-            string temp = text.Substring(0, text.IndexOf(currentWord)) + text.Substring((text.IndexOf(currentWord) + currentWord.Length));
-            if (temp.Contains(currentWord))
+            string temp = "";
+            if (text.IndexOf(currentWord) > -1)
             {
-                return currentWord;   
+                temp = text.Substring(0, text.IndexOf(currentWord)) + text.Substring((text.IndexOf(currentWord) + currentWord.Length));
             }
             else
             {
-                currentWord = currentWord.Substring(0, currentWord.Length - 1);
-                checkIsThisStringOkay( theLongestRepreatedPrefix,  currentWord, text);
-                return currentWord;
+                return (false, currentWord);
+            }
+            if (temp.Contains(currentWord)&&text.Substring((text.IndexOf(currentWord)+currentWord.Length),currentWord.Length)==currentWord)
+            {
+                if (currentWord.Length > 0)
+                    return (true, currentWord);
+                else
+                    return (false, currentWord);
+            }
+            else
+            {
+                if (currentWord.Length>0)
+                {
+                    currentWord = currentWord.Substring(0, currentWord.Length - 1);
+                    (isOkay,currentWord)=getTheLongestRepeatedString(theLongestRepreatedPrefix, currentWord, text);
+                }
+                
+                return (isOkay,currentWord);
             }
         }
     }
